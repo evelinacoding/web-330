@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB 330 -- Enterprise Javascript II</title>
+    <link rel="stylesheet" type="text/css" href="../theme.css">
+    <link rel="stylesheet" href="../site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+</head>
+<body class="light-theme">
+    <div class="assign-container">
+        <h1 class="app-header">Welcome to the Palindrome App</h1>
+
+        <div class="assign-content">
+            <div class="card">
+                <div class="card-title">Palindrome Checker</div>
+                <div class="card-content">
+                    <div class="form">
+                        <div class="form-field">
+                            <label for="txtMyName">Phrase Value</label>
+                            <input type="text" class="input" id="txtPhrase" name="myName">
+                        </div>
+
+                        <div class="form-field">
+                            <button class="btn btn-primary full-width" id="btnCheckPhrase">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="assign-container">
+        <div class="assign-content">
+            <div class="card">
+                <div class="card-title">Palindrome Results</div>
+                <div class="card-content assign-results-text" id="assign-results-header"></div>
+                <div id="assign-results" class="assign-results-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getTodaysDate(date) {
+            date = new Date();
+            return date.toLocaleDateString();
+        };
+
+        function getLength(x) {
+            return x.length;
+        };
+
+        function reverseString(revString) {
+            return revString.split("").reverse().join('');  
+        };
+
+        function isPalindrome(pString) {
+            let rev = reverseString(pString);
+
+            if ( rev === pString) {
+                return true;
+            } else {
+                return false;
+            };
+    }   ;
+        
+        document.getElementById('btnCheckPhrase').onclick = function () {
+
+            //Capture user input
+            let txtPhrase = document.getElementById('txtPhrase').value.toLowerCase();
+            
+            
+
+            let today = getTodaysDate();
+
+            let len = getLength(txtPhrase);
+
+            let reversedPhrase = reverseString(txtPhrase);
+
+
+
+
+            let header = "<p>Date:"+today+"</p>"+"<p>Original Phrase: "+txtPhrase+"</p>"+"<p>Reversed Phrase: "+reversedPhrase+"<p>Phrase Length: "+len+"</p>";
+
+            let assignResults = header;
+            document.getElementById('assign-results-header').innerHTML = assignResults;
+
+            
+            isPalindrome(txtPhrase.toLowerCase());
+
+
+            if (isPalindrome(txtPhrase) === true) {
+                 document.getElementById('assign-results').innerHTML = "<p>" + txtPhrase + " <u><strong>is</u></strong> a palindrome!"
+            } else if (isPalindrome(txtPhrase) === false) {
+               document.getElementById('assign-results').innerHTML = "<p>" + txtPhrase + " <u><strong>is not</strong></u>" +" a palindrome!"
+            } else{
+                return;
+            }
+        }
+
+    </script>
+
+</body>
+</html>
