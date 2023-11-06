@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB 330 -- Enterprise Javascript II</title>
+    <link rel="stylesheet" type="text/css" href="../theme.css">
+    <link rel="stylesheet" href="../site.css">
+    <link rel="stylesheet" href="restaurant.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <!--Title: zepeda-restaurant.html
+    Author: Evelyn Zepeda
+    Date 11/5/2023
+    Description: A restaurant application-->
+</head>
+<body class="light-theme">
+    <div class="assign-container">
+        <h1 class="app-header">Welcome to the Restaurant App!</h1>
+       
+        <div class="assign-content">
+            
+                <div class="card">
+                    <div class="card-title">Restaurant Menu</div>
+                    <div class="card-content">
+                        <div class="grid-container">
+                        <div class="card">
+                            <div class="card-title ">Beverages</div>
+                            <div class="card-content" id="beverages">
+                                <label for="soda">
+                                        <input type="checkbox" value="3.30">Soda($3.30)
+                                    </label><br />
+                                    <label for="sweet-tea">
+                                        <input type="checkbox" value="3.30">Sweat Tea($3.30)
+                                    </label><br />
+                                    <label for="iced-coffee"></label>
+                                        <input type="checkbox" value="2.49">Iced Coffee($2.49)
+                                    </label><br />
+                                    <label for="bottled-water">
+                                        <input type="checkbox" value="2.15">Bottled Water($2.15)
+                                    </label><br />
+                            </div>        
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title ">Appetizers</div>
+                            <div class="card-content">
+
+                                <div class="card-content" id="appetizers">
+                                    <label for="Nachos">
+                                        <input type="checkbox" value="6.60">Nachos($6.60)
+                                    </label><br />
+                                    <label for="chips-salsa">
+                                        <input type="checkbox" value="5.50">Chips and Salsa($5.50)
+                                    </label><br />
+                                    <label for="pretzel"><input type="checkbox" value="8.80">
+                                        Pretzel with Cheese($8.80)
+                                    </label><br />
+                                    <label for="pickles">
+                                        <input type="checkbox" value="8.35">Fried Pickles($8.35)
+                                    </label><br />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title ">Main Courses</div>
+
+                            <div class="card-content" id="main-courses">
+                                <label for="tacos">
+                                    <input type="checkbox"  name="tacos" value="9.70" id="tacos">Street Tacos($9.70)
+                                </label><br />
+                                <label for="wings">
+                                    <input type="checkbox" value="12.80">Boneless Wings($12.80)
+                                </label><br />
+                                <label for="burger">
+                                    <input type="checkbox" value="12.65">Cheese Burger with Fries($12.65)
+                                </label><br />
+                                <label for="chicken-salad">
+                                    <input type="checkbox" value="9.65">Chicken Wrap with Salad($9.65)
+                                </label><br />
+                            </div>
+                        </div>
+
+                        <div class="card ">
+                            <div class="card-title ">Desserts</div>
+                                <div class="card-content" id="desserts">
+                                    <label for="icecream">
+                                        <input type="checkbox" value="4.30">Ice Cream($4.30)
+                                    </label><br />
+                                    <label for="cake">
+                                        <input type="checkbox" value="5.40">Chocolate Cake($5.40)
+                                    </label><br />
+                                    <label for="pretzel">
+                                        <input type="checkbox" value="3.80">Apple Pie($3.80)
+                                    </label><br />
+
+                                    <br>
+                                    <button class="btn btn-primary full-width" id="btnOrder">Place Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+            <a href="../index.html" class="return-home">Return</a>
+
+            <div class="card">
+                <div class="card-title">Order Summary</div>
+                <div class="card-content assign-results-text" id="order-total"></div>
+            </div> 
+
+        </div>
+    </div>
+    <script type="module" src="product.js"></script>
+    <script type="module">
+
+        //To import all the items
+        import { Bill,Beverage,Appetizer,MainCourse,Dessert } from "./index.js";
+
+        //An onclick for the button
+        document.getElementById('btnOrder').onclick = function() {
+            
+            //Variables for the divs and checkboxes
+            const beveragesEl = document.getElementById('beverages');
+            const beverages = beveragesEl.getElementsByTagName('input');
+
+            const appetizersEl = document.getElementById('appetizers');
+            const appetizers = appetizersEl.getElementsByTagName('input');
+
+            const mainCoursesEl = document.getElementById('main-courses');
+            const mainCourses = mainCoursesEl.getElementsByTagName('input');
+
+            const dessertEl = document.getElementById('desserts');
+            const desserts = dessertEl.getElementsByTagName('input');
+
+            //Creating a new bill item
+            const myBill = new Bill();
+
+            //Looping through the items
+            for (let beverage of beverages) {
+                if (beverage.checked) {
+                    myBill.addBeverage(new Beverage(beverage.name, beverage.value))
+                }
+            }
+
+            for (let mainCourse of mainCourses) {
+                if (mainCourse.checked) {
+
+                    myBill.addMainCourse(new MainCourse(mainCourse.name, mainCourse.value));
+                };
+            };
+
+            for (let appetizer of appetizers) {
+                if (appetizer.checked) {
+                    
+                    myBill.addAppetizer(new Appetizer(appetizer.name, appetizer.value));
+                };
+            };
+
+            for (let dessert of desserts) {
+                if (dessert.checked) {
+
+                    myBill.addDessert(new Dessert(dessert.name, dessert.value))
+                };
+            };
+
+            //A variable for the total price
+            let totalPrice = myBill.getTotal();
+
+            //The total price fixed 
+            let fixedTotal = totalPrice.toFixed(2);
+
+            //This prints out the total
+            document.getElementById("order-total").innerHTML = `Your order total is ${fixedTotal}`;
+            //document.getElementById('order-total').innerHTML= bill.getTotal();
+        };
+
+        
+
+    </script>
+    
+
+
+</body>
+</html>
