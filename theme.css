@@ -142,7 +142,7 @@ h2, h3, h4 {
     width: 50%;
     margin-bottom: 30px;  
     border-collapse: separate;
-    
+    border: 1px solid var(--table-border-color);
 }
 
 .table th {
