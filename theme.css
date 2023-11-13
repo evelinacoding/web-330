@@ -14,6 +14,11 @@ body.light-theme {
     --btn-hover-background-color: #D6A800;
     --btn-hover-color: #4F3674;
     --input-border-color: #ccc;
+    --table-header-background-color: #4f3674;
+    --table-header-color: #fff;
+    --table-border-color: #ddd;
+    --table-hover-background-color: #D6A800;
+    --table-hover-color: #4F3674;
 }
 
 body.dark-theme {
@@ -27,11 +32,17 @@ body.dark-theme {
     --heading-border-color: #424242;
     --anchor-hover-color: #D176e1;
     --anchor-hover-background-color: #303030;
-    --card-background-color: #D176e1;
+    --card-background-color: #424242;
+    --btn-background-color: #D176e1;
     --btn-color: #fff;
     --btn-hover-background-color: #7d4787;
     --btn-hover-color: #fff;
     --input-border-color: #303030;
+    --table-header-background-color: #D176E1;
+    --table-header-color: #fff;
+    --table-border-color: #303030;
+    --table-hover-background-color: #7D4787;
+    --table-hover-color: #fff;
 
 }
 
@@ -96,7 +107,7 @@ h2, h3, h4 {
     margin: 4px 2px;
     cursor: pointer;
     padding: 15px 32px;
-    color: black;
+    color: #000000;
 }
 
 .btn-primary {
@@ -126,3 +137,31 @@ h2, h3, h4 {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
+.table {
+    width: 50%;
+    margin-bottom: 30px;  
+    border-collapse: separate;
+    
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    color: var(--table-header-color);
+    background-color: var(--table-header-background-color);
+    padding-left: 10px;
+};
+
+.table td, th {
+    border: 1px solid var(--table-border-color);
+    padding: 8px;
+};
+
+.table-hover tr:hover {
+    background-color: var(--table-hover-background-color);
+    color: var(--table-hover-color);
+    cursor: pointer;
+
+};
