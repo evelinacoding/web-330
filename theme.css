@@ -81,6 +81,7 @@ h2, h3, h4 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     background: var(--card-background-color);
+    width: 600px;
 }
 
 .card-title {
@@ -138,7 +139,8 @@ h2, h3, h4 {
     box-sizing: border-box;
 }
 
-.table {
+table {
+    border-collapse: collapse;
     width: 50%;
     margin-bottom: 30px;  
     border-collapse: separate;
@@ -152,16 +154,16 @@ h2, h3, h4 {
     color: var(--table-header-color);
     background-color: var(--table-header-background-color);
     padding-left: 10px;
-};
+}
 
 .table td, th {
     border: 1px solid var(--table-border-color);
     padding: 8px;
-};
+}
 
 .table-hover tr:hover {
     background-color: var(--table-hover-background-color);
     color: var(--table-hover-color);
     cursor: pointer;
 
-};
+}
