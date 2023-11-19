@@ -70,18 +70,21 @@
 </div>
 <script src="../theme.js"></script>
     <script type="module">
+        //To import the different classes
        import { Product } from "./product.js";
        import { ShoppingCart } from "./shopping-cart.js";
        import { CartComponent } from "./cart-component.js"
 
        let shoppingCart = new ShoppingCart();
 
+       //A function for the Cart Count
        setCartCount();
 
        function setCartCount() {
             document.getElementById('cart-count').innerHTML =shoppingCart.count();
        };
 
+       //An onclick function to add products
        document.getElementById('btnAddProduct').onclick = function () {
 
             let productList = document.getElementById('productList')
@@ -90,6 +93,7 @@
 
             let productValue = productList.options[productList.selectedIndex].value;
 
+            //Add's products other than select
             if (product !== "--Select--") { 
                 
                 //Add to the shopping cart
@@ -106,6 +110,7 @@
             };
        };
        
+       //An onclick to create the table
        document.getElementById('cartIcon').onclick = function() {
             let cartDisplayTable = `<table class="table">
                 <tr>
@@ -114,7 +119,7 @@
                     <th>Price</th>
                 </tr>`
                 
-
+                //A for loop to loop through the objects
             for (let item of shoppingCart) {
                 cartDisplayTable += `
                     <tr>
@@ -125,7 +130,7 @@
                     console.log(item)
             };
 
-
+        //Displays the completed table
         document.getElementById('shoppingCart').innerHTML = cartDisplayTable + `</table>`;
 
        };

@@ -1,3 +1,4 @@
+//To export the CartComponent class
 export class CartComponent extends HTMLElement {
     constructor() {
         super();
@@ -7,5 +8,5 @@ export class CartComponent extends HTMLElement {
         this.innerHTML = `<i id="cartIcon" class="fa fa-shopping-cart"></i>(<span id="cart-count"></span>)`;
     };
 };
-
+//Creates the cart component element
 customElements.define("cart-component", CartComponent);

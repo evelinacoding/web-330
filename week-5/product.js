@@ -1,3 +1,4 @@
+//Exports and creates the Product class
 export class Product {
     constructor(name, price) {
         this.name = name;

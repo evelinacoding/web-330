@@ -1,5 +1,4 @@
-
-
+//Exports and creates the Shopping Cart class
 export class ShoppingCart {
     constructor() {
         this.products = [];
