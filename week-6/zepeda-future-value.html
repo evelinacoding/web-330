@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB 330 -- Enterprise Javascript II</title>
+    <link rel="stylesheet" type="text/css" href="../theme.css">
+    <link rel="stylesheet" href="../site.css">
+    <link rel="stylesheet" href="../flex-layout.css">
+    <link rel="stylesheet" href="zepeda-future-value.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
+    <!--Title: zepeda-future-value.html
+    Author: Evelyn Zepeda
+    Date 11/23/2023
+    Description: -->
+</head>
+<body class="light-theme">
+    
+    <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px;">
+        <span id="icon-text"></span>
+    </i>
+    <div class="container">
+        <h1 class="app-header">Welcome to the Future Value App!</h1>
+
+        <div class="assign-content">
+            <div class="card">
+                <div class="card-title">Future Value Calculator</div>
+                <div class="danger col-12" id="errorLog" style="background-color: blue;"></div>
+                <div class="card-content">
+                    <div class="form">
+
+                        <!--Monthly Payment Row-->
+                        <div class="row">
+                            <div class="form-field col-5">
+                                <label for="txtMonthlyPayment">Monthly Payment:</label>
+                            </div>
+                            <div class="form-field col-7">
+                                <input type="text" id="txtMonthlyPayment" class="input">
+                            </div>
+                        </div>
+
+                        <!--Interest Rate Row-->
+                        <div class="row">
+                            <div class="form-field col-5">
+                                <label for="txtYearlyRate">Interest Rate</label>
+                            </div>
+                            <div class="form-field col-7">
+                                <input type="text" id="txtYearlyRate" class="input">
+                            </div> 
+                        </div>
+
+                        <!--Help Message-->
+                        <i class="danger">Enter 11% as 11.1</i>
+
+                        <!--Number of Years Row-->
+                        <div class="row">
+                            <div class="form-field col-5">
+                                <label for="listNumYears" class="form-label">Number of Years:</label>
+                            </div>
+                            <div class="form-field col-7">
+                                <select id="listNumbYears" class="drop-down-menu">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                            
+                        
+                        <!--Button-->
+                        <div class="row">
+                            <div class="form-field">
+                                <button class="btn btn-primary full-width" id="btnCalculate" onclick="calculate()">Calculate</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div><a class="return-home" href="../index.html">Return</a>
+        </div>
+        
+    
+
+    
+        <div class="assign-content">
+            <!--The calculation card-->
+            <div class="card">
+                <div class="card-title">Calculation as of <span id="today"></span></div>
+                <div class="card-content assign-results-text" id="futureValue"></div>
+            </div>
+        </div>
+        
+        
+
+    
+    </div>
+
+    <script src="../theme.js"></script>
+    <script type="module">
+        import { FinanceCalculator } from './finance-calculator.js';
+        import { Validator } from './validator.js';
+
+       document.getElementById('today').innerHTML = new Date().toLocaleDateString('en-US');
+
+        document.getElementById('btnCalculate').onclick = calculate;
+        
+        function calculate() {
+
+            
+            //The monthly payment input value
+            let monthlyPayment = document.getElementById('txtMonthlyPayment').value;
+
+            //Creating the rate variable
+            let rate = document.getElementById('txtYearlyRate').value
+
+            //The number of years selection
+            let years = document.getElementById('listNumbYears').value;
+
+            //Grabbing the error log
+            let errorLogEl = document.getElementById('errorLog');
+            //Instantiating a new Validator class
+
+            //Creating the error log array
+            let errorLog = [];
+
+            
+            //Instantiating a new Validator class
+
+            let monthlyPaymentValidator = new Validator("Monthly Payment", monthlyPayment);
+            monthlyPaymentValidator.addRequiredField();
+            monthlyPaymentValidator.addRequiredFloatField();
+            monthlyPaymentValidator.addFloatMinField(100);
+            
+            //Pushing messages to the error log
+            if(!monthlyPaymentValidator.validate()) {
+                for (let msg of monthlyPaymentValidator.messages) {
+                    errorLog.push(msg)
+                };
+            };
+
+            let rateValidator = new Validator("Interest Rate", rate);
+            //Making rateValidator a required field
+            rateValidator.addRequiredField();
+            rateValidator.addRequiredFloatField();
+            
+
+            //Setting the max field 
+            rateValidator.addFloatMaxField(100);
+            
+
+            if(!rateValidator.validate()) {
+                for(let msg of rateValidator.messages) {
+                    errorLog.push(msg)
+                };
+            };
+
+            if(monthlyPaymentValidator.validate() && rateValidator.validate()) {
+
+                //To clear the error log
+                errorLogEl.innerHTML = "";
+
+                //Creating the futureValue variable
+                const futureValue = FinanceCalculator.convertToCurrency(FinanceCalculator.calculateFutureValue(monthlyPayment, rate, years));
+
+                document.getElementById('futureValue').innerHTML = `The future value is ` + futureValue
+            } else {
+                //To clear the error log
+                errorLogEl.innerHTML = "";
+
+                //Creating the errorLogMessage variable
+                let errorLogMessage = "<ul>"
+
+                for(let err of errorLog) {
+                    errorLogMessage += `<li>${err}</li>`;
+                }
+                
+                errorLogMessage += "</ul>";
+                errorLogEl.innerHTML = errorLogMessage;
+            }
+            
+
+
+        };
+    </script>
+
+</body>
+</html>
