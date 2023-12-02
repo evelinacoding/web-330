@@ -4,6 +4,7 @@
     Description: Creating the finance calculator
 */
 
+//To export the FinanceCalculator class
 export class FinanceCalculator {
     static MONTHS_IN_YEAR = 12;
 
@@ -16,6 +17,7 @@ export class FinanceCalculator {
         return futureValue.toFixed(2);
     };
 
+    //Converts the field to currency
     static convertToCurrency(field) {
         const currencyFormatter = new Intl.NumberFormat('en-US', {style: 'currency', currency: "USD"});
 

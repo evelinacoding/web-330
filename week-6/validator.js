@@ -4,11 +4,13 @@
     Description: The validator 
 */
 
+//Import statements for the classes
 import { RequiredField } from './required-field.js'
 import { FloatField } from './float-field.js'
 import { FloatMinField } from './float-min-field.js'
 import { FloatMaxField } from './float-max-field.js'
 
+//Exports the Validator class
 export class Validator {
     constructor(name, field) {
         this.name = name;
@@ -17,6 +19,7 @@ export class Validator {
         this.messages = [];
     };
 
+    //Adding the required fields
     addRequiredField() {
         this.validators.push(new RequiredField(this.name, this.field));
     };
@@ -33,6 +36,7 @@ export class Validator {
         this.validators.push(new FloatMaxField(this.name, this.field, max));
     };
 
+    //The validate function
     validate() {
         for (let valid of this.validators) {
 
