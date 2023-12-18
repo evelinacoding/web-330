@@ -1,0 +1,328 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.about {
+    background-color: #DCD7C9;
+}
+
+body {
+    /* background-color: #223a3b; */
+}
+
+.container {
+    width: 1400px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+
+
+.name {
+    font-size: 40px;
+    font-family: montserrat;
+    font-weight: 200;
+    background-color: #2C3639;
+    color: #fff;
+    padding: 20px;
+    
+}
+
+nav {
+    /* background-color: #F4dec8; */
+    background-color: #A27B5C;
+    height: 50px;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    text-align: right;
+    padding-top: 10px;
+    padding-right: 40px;
+}
+
+.home-image {
+    /* background-color: #2a3646; */
+    margin: 40px 0 0 60px;
+    padding-top: 10px;
+}
+
+
+.profile-img {
+    width: 500px;
+    border: 15px solid #ca8b2c;
+    border-radius: 12%;
+    float: left;
+    margin-top: 30px;
+}
+
+.brief-bio {
+    float: right;
+    width: 700px;
+    background-color: #102c35;
+    height: 600px;
+    color: #fff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+    border-radius: 12%;
+    border: 10px solid rgb(37, 56, 68);
+    margin-right: 30px;
+    margin-bottom: 100px;
+    padding-top: 40px;
+    
+}
+
+.background {
+    background-color: #DCD7C9;
+}
+
+.bio {
+    padding: 40px;
+    word-spacing: 7px;
+}
+
+.hello-world {
+    font-family: montserrat;
+    font-weight: 200;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+.bucket-container {
+ clear: both;
+ background-color: #A27B5C;
+ height: 300px;
+ 
+}
+
+#bucket-list {
+    font-family: montserrat;
+    font-weight: 500;
+    color: #fff;
+    font-size: 30px;
+    padding: 30px 40px;
+}
+    
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding-left: 40px;
+}
+
+.grid-item {
+    font-size: 25px;
+    padding: 5px;
+    display: inline;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    width: 1400px;
+}
+
+a {
+    padding: 10px;
+}
+
+
+a:link {
+    color: #E6B325;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #61481C;
+}
+
+a:hover {
+    color: #DCD7C9;
+}
+
+#watermelon {
+    width: 400px;
+    float: left;
+    margin: 100px 30px 0 40px;
+    border: 15px solid #ca8b2c;
+    border-radius: 12%;
+}
+
+#splash {
+    width: 400px;
+    float: right;
+    border: 15px solid #ca8b2c;
+    border-radius: 12%;
+    margin: 70px 40px 0 30px;
+}
+
+#center {
+    padding: 150px 0;
+    width: 700px;
+    margin-left: 400px;
+    height: 700px;
+   
+}
+
+.about {
+    width: 500px; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.about-background {
+   background-color: #DCD7C9;
+}
+
+#about-title {
+    font-family: montserrat;
+    font-weight: 500;
+    color: white;
+    padding-bottom: 10px;
+}
+
+ #resume-container {
+    background-color: #DCD7C9;
+    height: 700px;
+ }
+
+ #resume-background {
+    background-color: #102c35;
+    width: 900px;
+    margin: 0 auto;
+    height: 700px;
+ }
+
+ #title {
+    font-family: montserrat;
+    font-weight: 200;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-size: 25px;
+ }
+
+ #job-title {
+    margin-right: 200px;
+    font-size: 30px;
+    color: #A27B5C;
+    float: right;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ }
+
+
+ #job-list {
+    text-align: center;
+    float: right;
+    width: 200px;
+    margin-right: 120px;
+    color: #A27B5C;
+    font-size: 18px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+
+ }
+
+ #date-title {
+    color: #A27B5C;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    font-size: 30px;
+    padding-left: 200px;
+    /* background-color: greenyellow; */
+ }
+
+
+ #dates {
+    /* clear: both; */
+    text-align: center;
+    width: 200px;
+    margin-left: 120px;
+    /* padding-left: 190px; */
+    color: #A27B5C;
+    float: left;
+    font-size: 18px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ }
+
+
+ .spacing {
+    margin-top: 100px;
+ }
+
+ #projects-title {
+    font-family: montserrat;
+    text-align: center;
+    padding: 30px;
+ }
+
+ #projects-background {
+    background-color: #DCD7C9;
+    
+ }
+
+#projects-container {
+    width: 600px;
+    text-align: center;
+    margin-left: 400px;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 10px 10px black;
+}
+
+.cards {
+    display: grid;
+    padding: 10px;
+    column-gap: 10px;
+    row-gap: 10px;
+    grid-template-columns: auto auto auto;
+    font-family: montserrat;
+}
+
+.api {
+     display: grid;
+    padding: 10px;
+    column-gap: 10px;
+    row-gap: 10px;
+    grid-template-columns: auto auto auto;
+    font-family: montserrat;
+}
+
+.api-container {
+    background-color: #2C3639;
+    box-shadow: 5px 5px #DCD7C9;
+    color: white;
+    padding: 20px;
+}
+
+#api-title {
+    padding: 50px 0 50px 600px;
+    width: 100%;
+    color: #2C3639;
+    font-family: montserrat;
+    font-size: 30px;
+    
+}
+
+.data-container {
+    background-color: #ca8b2c;
+    color: white;
+    padding: 100px;
+   
+}
+
+#footer {
+    padding: 30px;
+    border-top: dashed 5px #fff;
+    text-align: center;
+    width: 1400px;
+    background-color: #2C3639;
+    color: #A27B5C;
+    font-family: montserrat, sans-serif;
+}
+
+.footer-padding {
+    padding: 5px;
+}
