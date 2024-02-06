@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div id="errorLog"></div>
+   <div class="container">
+    <h1 class="app-header">Welcome to the Future Value App!</h1>
+
+    <div class="assign-content">
+        <div class="card">
+            <div class="card-title">Future Value Calculator</div>
+            <div class="danger col-12" id="errorLog" style="background-color: blue;"></div>
+            <div class="card-content">
+                <div class="form">
+
+                    <!--Monthly Payment Row-->
+                    <div class="row">
+                        <div class="form-field col-5">
+                            <label for="txtMonthlyPayment">Monthly Payment:</label>
+                        </div>
+                        <div class="form-field col-7">
+                            <input type="text" id="txtMonthlyPayment" class="input">
+                        </div>
+                    </div>
+
+                    <!--Interest Rate Row-->
+                    <div class="row">
+                        <div class="form-field col-5">
+                            <label for="txtYearlyRate">Interest Rate</label>
+                        </div>
+                        <div class="form-field col-7">
+                            <input type="text" id="txtYearlyRate" class="input">
+                        </div> 
+                    </div>
+
+                    <!--Help Message-->
+                    <i class="danger">Enter 11% as 11.1</i>
+
+                    <!--Number of Years Row-->
+                    <div class="row">
+                        <div class="form-field col-5">
+                            <label for="listNumYears" class="form-label">Number of Years:</label>
+                        </div>
+                        <div class="form-field col-7">
+                            <select id="listNumbYears" class="drop-down-menu">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                    </div>
+   <div class="row">
+    <div class="form-field">
+        <button class="btn btn-primary full-width" id="btnCalculate" onclick="calculate()">Calculate</button>
+    </div>
+</div>
+<script>
+
+
+
+        document.getElementById('btnCalculate').onclick = calculate;
+        
+        function calculate() {
+
+            
+            //The monthly payment input value
+            let monthlyPayment = document.getElementById('txtMonthlyPayment').value;
+
+            //Creating the rate variable
+            let rate = document.getElementById('txtYearlyRate').value
+
+            //The number of years selection
+            let years = document.getElementById('listNumbYears').value;
+
+            //Grabbing the error log
+            let errorLogEl = document.getElementById('errorLog');
+
+            //Instantiating a new Validator class
+            let monthlyPaymentValidator = new Validator("Monthly Payment", monthlyPayment);
+
+            monthlyPaymentValidator.addRequiredField();
+            monthlyPaymentValidator.addRequiredFloatField();
+            monthlyPaymentValidator.addFloatMinField(100);
+
+            console.log(monthlyPaymentValidator.addRequiredFloatField("Interest", 23))
+            
+            //Instantiating a new Validator class
+            const rateValidator = new Validator("Interest Rate", rate);
+
+            //Making rateValidator a required field
+            rateValidator.addRequiredField();
+            rateValidator.addRequiredFloatField();
+            
+
+            //Setting the max field 
+            rateValidator.addFloatMaxField(100);
+
+            //Creating the error log array
+            const errorLog = [];
+
+            //Pushing messages to the error log
+            if(!monthlyPaymentValidator.validate()) {
+                for (let msg of monthlyPaymentValidator.messages) {
+                    errorLog.push(msg)
+                };
+            };
+
+            if(!rateValidator.validate()) {
+                for(let msg of rateValidator.messages) {
+                    errorLog.push(msg)
+                };
+            };
+
+            if(monthlyPaymentValidator.validate() && rateValidator.validate()) {
+
+                //To clear the error log
+                errorLogEl.innerHTML = "";
+
+                //Creating the futureValue variable
+                const futureValue = FinanceCalculator.calculateFutureValue(monthlyPayment, rate, years);
+
+                document.getElementById('futureValue').innerHTML = `The future value is ` + FinanceCalculator.convertToCurrency(futureValue);
+            } else {
+                //To clear the error log
+                errorLogEl.innerHTML = "";
+
+                //Creating the errorLogMessage variable
+                let errorLogMessage = `<ul>`
+                for(let err of errorLog) {
+                errorLogMessage += `<li>${err}</li>`;
+                }
+                errorLogMessage += `</ul>`;
+                errorLogEl.innerHTML += errorLogMessage;
+            }
+            
+
+
+        };
+
+class Validator {
+    constructor(name, field) {
+        this.name = name;
+        this.field = field;
+        this.validators = [];
+        this.messages = [];
+    };
+
+    addRequiredField() {
+        this.validators.push(new RequiredField(this.name, this.field));
+    };
+
+    addRequiredFloatField() {
+        this.validators.push(new FloatField(this.name, this.field));
+    };
+
+    addFloatMinField(min) {
+        this.validators.push(new FloatMinField(this.name, this.field, min));
+    };
+
+    addFloatMaxField(max) {
+        this.validators.push(new FloatMaxField(this.name, this.field, max));
+    };
+
+    validate() {
+        for (let valid of this.validators) {
+
+            if (valid.validate()) {
+                this.messages.push(valid.getMessage());
+                return false;
+            };
+            
+        };
+
+        return true;
+    };
+};
+
+class FloatField {
+    constructor(name, field) {
+        this.name = name;
+        this.field = field;
+    }
+
+  
+    validate() {
+        //return isNaN(parseFloat(this.field));
+        return !isNaN(parseFloat(this.field))
+    }
+    
+
+    getMessage() {
+        return `${this.name} must be a float value. You entered ${this.field}.`
+    }
+
+    
+};
+
+
+  
+
+    function validating(field) {
+        //return isNaN(parseFloat(this.field));
+        return (!isNaN(parseFloat(field)))
+    }
+
+console.log(validating(23))
+
+
+
+class FloatMaxField {
+    constructor(name, field, max) {
+        this.name = name;
+        this.field = field;
+        this.max = max;
+    };
+
+    validate() {
+        return parseFloat(this.field) > parseFloat(this.max);
+    };
+    
+
+    getMessage() {
+        return `${this.name} must be less than ${this.max}. You entered ${this.field}`
+
+    };
+};
+
+class FloatMinField {
+    constructor(name, field, min) {
+        this.name = name;
+        this.field = field;
+        this.min = min;
+    };
+
+    validate() {
+        return parseFloat(this.field) < parseFloat(this.min);
+    }
+
+    getMessage() {
+        return `${this.name} must be more than ${this.min}. You entered ${this.field}`
+    };
+};
+
+class RequiredField {
+    constructor(name, field) {
+        this.name = name;
+        this.field = field;
+    }
+
+    //To validate if it's a string
+    validate() {
+        if(parseFloat(this.field)) {
+            return false;
+        }
+  
+        return true;
+        };
+    
+
+    //To return a message
+    getMessage() {
+        return `${this.name} is a required field.`
+    }
+}
+
+
+    </script>
+</body>
+</html>
