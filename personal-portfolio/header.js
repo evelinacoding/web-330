@@ -23,6 +23,7 @@ class Header extends HTMLElement {
             <a href="projects.html">Projects</a>
             <a href="api.html">API Unit Tests</a>
             <a href="database.html">Database Diagrams</a>
+            <a href="devops.html">DevOps</a>
           </nav>`;
     }
 }
